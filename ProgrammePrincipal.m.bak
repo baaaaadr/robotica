@@ -39,7 +39,7 @@ global RayonCycleLimite              %Rayon du cycle limite
 global G_Affichage                   %Variable pour activer ou pas l'affichage graphique des r�sultats
  
 %%Param�tres de la simulation
-Duree = 40;                          %Temps de la simulation en secondes
+Duree = 20;                          %Temps de la simulation en secondes
 PasEchantillonnage = 0.1;            %Pas d'�chantillonnage constant pour la simulation sous Simulink
 G_Affichage = 1;                     %Affichage ou pas des simulations
 G_ActivationAlgorithmeOrbital = 0;   %Activation ou pas de l'algorithme orbital
@@ -75,17 +75,17 @@ if G_Affichage ~= 0
 end
  
 %%Exemple 1
-%PositionsObstacles = [12  20];
+PositionsObstacles = [12  20];
 
 %%Exemple 2
 %PositionsObstacles = [12  20.1
 %                      14  19.3];
 
 %%Exemple 3 - Plusieurs obstacles (V.d)
-PositionsObstacles = [7    20.5
-                      9    20.7
-                      11   21.2
-                      12.5 19.8];
+%PositionsObstacles = [8    20.3
+%                      10   20.8
+%                      12   19.7
+%                      13.5 21.2];
  
 %%Instanciation des obstacles utilis�s dans la simulation
 Obstacle = CObstacle(); %Initialisation de la structure
