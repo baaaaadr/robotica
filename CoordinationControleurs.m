@@ -75,9 +75,9 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Forcer l'activation du contrôleur d'attraction vers la cible
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-IndicateurCA=1;
-DonneesCommandeAttraction = VariablesCommandeAttraction(Data);
-Commande  = CommandeAttraction(DonneesCommandeAttraction);
+% IndicateurCA=1;
+% DonneesCommandeAttraction = VariablesCommandeAttraction(Data);
+% Commande  = CommandeAttraction(DonneesCommandeAttraction);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
@@ -86,23 +86,23 @@ Commande  = CommandeAttraction(DonneesCommandeAttraction);
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %Processus de Sélection 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-% % SensEvitementObstacle = 0; %i.e., que le contrôleur d'évitement doit trouver par lui-même le sens qu'il doit prendre
-% % DonneesCommandeEvitement = [0; 0; 0];  
-% % if isempty(ListeObstaclesCollisionPotentiel)
-% %     IndicateurCA = 0; %Activer le contrôleur d'attraction
-% %     DonneesCommandeAttraction = VariablesCommandeAttraction(Data);
-% % else
-% %     IndicateurCA = 1; %Activer le controleur d'évitement d'obstacles
-% %     DonneesCommandeEvitement = VariablesCommandeEvitement(Data, IndiceObstaclePlusProche, DistanceRobotObstaclePlusProche, SensEvitementObstacle);    
-% % end
-% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% % %%Calcul de la commande à appliquer aux actionneurs%%
-% % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% % if (IndicateurCA==0) %Cas de l'attraction vers l'objectif
-% %     Commande  = CommandeAttraction(DonneesCommandeAttraction);
-% % else %Activation de l'évitement d'obstacles
-% %     Commande =  CommandeEvitement(DonneesCommandeEvitement);
-% % end
+SensEvitementObstacle = 0; %i.e., que le contrôleur d'évitement doit trouver par lui-même le sens qu'il doit prendre
+DonneesCommandeEvitement = [0; 0; 0];  
+if isempty(ListeObstaclesCollisionPotentiel)
+    IndicateurCA = 0; %Activer le contrôleur d'attraction
+    DonneesCommandeAttraction = VariablesCommandeAttraction(Data);
+else
+    IndicateurCA = 1; %Activer le controleur d'évitement d'obstacles
+    DonneesCommandeEvitement = VariablesCommandeEvitement(Data, IndiceObstaclePlusProche, DistanceRobotObstaclePlusProche, SensEvitementObstacle);    
+end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Calcul de la commande à appliquer aux actionneurs%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+if (IndicateurCA==0) %Cas de l'attraction vers l'objectif
+    Commande  = CommandeAttraction(DonneesCommandeAttraction);
+else %Activation de l'évitement d'obstacles
+    Commande =  CommandeEvitement(DonneesCommandeEvitement);
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  

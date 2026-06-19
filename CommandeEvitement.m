@@ -1,13 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Lounis ADOUANE                                                     %
-%% Université de Technologie de Compiègne (UTC)                       %
-%% Département Génie Informatique (GI)                                %
+%% Universitï¿½ de Technologie de Compiï¿½gne (UTC)                       %
+%% Dï¿½partement Gï¿½nie Informatique (GI)                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Mini-projet (SY15)                                                 %
 %% "Planification et commande des robots mobiles"                     %
-%% Théorème de stabilité de Lyapunov et méthode des cycles-limites    %
+%% Thï¿½orï¿½me de stabilitï¿½ de Lyapunov et mï¿½thode des cycles-limites    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Dernière modification le 12/05/2020                                %
+%% Derniï¿½re modification le 12/05/2020                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 function CommandeReelle = CommandeEvitement(Donnees)
@@ -23,9 +23,10 @@ Vmax = 0.5;
 % Premier type de commande 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Kp = 15; 
+Kp = 15;
 V = Vmax;
-W = 0.2; %A changer
+%%Loi de commande Lyapunov (eq. 9 article [1]) :
+W = ThetaC_p + Kp * ThetaTilde;
 
 ValeurFonctionLyapunov = 0.5*rad2deg(ThetaTilde)^2/10; 
 
