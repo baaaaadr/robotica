@@ -1,13 +1,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Lounis ADOUANE                                                     %
-%% Université de Technologie de Compiègne (UTC)                       %
-%% Département Génie Informatique (GI)                                %
+%% Universitï¿½ de Technologie de Compiï¿½gne (UTC)                       %
+%% Dï¿½partement Gï¿½nie Informatique (GI)                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Mini-projet (SY15)                                                 %
 %% "Planification et commande des robots mobiles"                     %
-%% Théorème de stabilité de Lyapunov et méthode des cycles-limites    %
+%% Thï¿½orï¿½me de stabilitï¿½ de Lyapunov et mï¿½thode des cycles-limites    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Dernière modification le 12/05/2020                                %
+%% Derniï¿½re modification le 12/05/2020                                %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
 function CommandeReelle = CommandeAttraction(Donnees)
@@ -21,19 +21,22 @@ ThetaReel = Donnees(5);
 %Vmax = 1; %1m/s -> 3.6km/h
 Vmax = 0.5;
  
-if (gt(Ecart,0.2)) % Pour appliquer cette commande uniquement quand le robot n'est pas tout près de la cible
-    %%La position du point effectif (disposé sur le robot) à asservir sur la consigne
-    l1 = 0.4; %Selon l'axe x (Devant le robot)
-    l2 = 0;   %Selon l'axe y (A côté du robot)
+if (gt(Ecart,0.2)) % Pour appliquer cette commande uniquement quand le robot n'est pas tout prï¿½s de la cible
+    %%La position du point effectif (disposï¿½ sur le robot) ï¿½ asservir sur la consigne
+    l1 = 0.4; %Selon l'axe x
+    l2 = 0;   %Selon l'axe y 
     K1 = 0.1; 
     K2 = 0.1; 
-    V1 =  K1*Ex; 
+    V1 =  K1*Ex;
     V2 =  K2*Ey;
     %%
-    %%M = ###;            %A changer
-    Commande = [2 0.2];   %A changer
+    %%Matrice cinematique du point Pt deporte de (l1, l2) (eq. 2 article [1])
+    M = [cos(ThetaReel), -l1*sin(ThetaReel) - l2*cos(ThetaReel);
+         sin(ThetaReel),  l1*cos(ThetaReel) - l2*sin(ThetaReel)];
+    %%Inversion : (v, w) = M^-1 * (V1, V2) (loi Lyapunov, eq. 3 article [1])
+    Commande = M \ [V1; V2];
     %%
-    V = Vmax; 
+    V = Vmax;
     W = Commande(2);
 else
     V = 0;
