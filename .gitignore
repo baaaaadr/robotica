@@ -1,0 +1,13 @@
+
+slprj/
+
+*.slxc
+
+*.autosave
+
+*.asv
+
+*.mex*
+
+octave-workspace
+
